@@ -36,7 +36,7 @@ type Stat = (typeof stats)[number];
    Listens to visibilitychange: if the page returns while animation
    is in progress (rAF was suspended), jumps to final value. */
 function Counter({ stat, animate }: { stat: Stat; animate: boolean }) {
-  const [display, setDisplay] = useState(stat.initial);
+  const [display, setDisplay] = useState<string>(stat.initial);
 
   /* Main animation */
   useEffect(() => {
