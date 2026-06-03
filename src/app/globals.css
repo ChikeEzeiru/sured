@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* ── Fonts ─────────────────────────────────────────── */
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Colors › Background ────────────────────────────── */
+  --color-bg-primary:   #020617;
+  --color-bg-secondary: #0f172a;
+
+  /* ── Colors › Text ──────────────────────────────────── */
+  --color-text-primary:  #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted:    #94a3b8;
+  --color-text-disabled: #475569;
+
+  /* ── Colors › Border ────────────────────────────────── */
+  --color-border-primary:   #334155;
+  --color-border-secondary: #1e293b;
+
+  /* ── Colors › Brand ─────────────────────────────────── */
+  --color-brand:        #6366f1;
+  --color-brand-hover:  #4f46e5;
+  --color-brand-subtle: rgba(99, 102, 241, 0.12);
+
+  /* ── Colors › Utility / Component ───────────────────── */
+  --color-surface:        #0f172a; /* utility-neutral-50  */
+  --color-surface-border: #1e293b; /* utility-neutral-100 */
+
+  /* ── Typography › Body ──────────────────────────────── */
+  --text-xs:   0.75rem;    /* 12px */
+  --text-sm:   0.875rem;   /* 14px */
+  --text-md:   1rem;       /* 16px */
+  --text-lg:   1.125rem;   /* 18px */
+  --text-xl:   1.25rem;    /* 20px */
+
+  /* ── Typography › Display ───────────────────────────── */
+  --text-display-sm: 1.875rem; /* 30px — mobile hero  */
+  --text-display-md: 2.5rem;   /* 40px — desktop hero */
+
+  /* ── Line Heights ───────────────────────────────────── */
+  --leading-xs:         1rem;    /* 16px */
+  --leading-sm:         1.25rem; /* 20px */
+  --leading-md:         1.5rem;  /* 24px */
+  --leading-lg:         1.75rem; /* 28px */
+  --leading-display-sm: 2.375rem; /* 38px */
+  --leading-display-md: 3rem;     /* 48px */
+
+  /* ── Letter Spacing ─────────────────────────────────── */
+  --tracking-display: -0.05em; /* -0.8px @ 16px base */
+
+  /* ── Border Radius ──────────────────────────────────── */
+  --radius-sm:  0.25rem; /* 4px  — primary button/card radius */
+  --radius-md:  0.5rem;  /* 8px  */
+  --radius-lg:  0.75rem; /* 12px */
+  --radius-full: 9999px;
+
+  /* ── Shadows ─────────────────────────────────────────── */
+  --shadow-brand:
+    0px 4px 8px -1px rgba(79, 70, 229, 0.2),
+    0px 3px 6px -2px rgba(67, 56, 202, 0.12);
+  --shadow-xs:
+    0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ── Page-load animations ────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes fade-in-right {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@layer utilities {
+  .anim-fade-up    { animation: fade-up       0.75s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .anim-fade-right { animation: fade-in-right 0.75s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .anim-fade-in    { animation: fade-in       0.6s  cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim-fade-up,
+    .anim-fade-right,
+    .anim-fade-in { animation: none; }
+  }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
   }
 }
 
+/* ── Base ────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
