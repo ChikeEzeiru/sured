@@ -1,7 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Dithering } from "@paper-design/shaders-react";
+import dynamic from "next/dynamic";
+
+const Dithering = dynamic(
+  () => import("@paper-design/shaders-react").then((m) => ({ default: m.Dithering })),
+  { ssr: false }
+);
 
 export default function CtaSection() {
   return (

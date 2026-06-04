@@ -208,9 +208,9 @@ export default function TestimonialSection() {
       applyOpacities(snapped, true);
       startTimer();
     };
-    el.addEventListener("touchstart", onStart);
+    el.addEventListener("touchstart", onStart, { passive: true });
     el.addEventListener("touchmove", onMove, { passive: false });
-    el.addEventListener("touchend", onEnd);
+    el.addEventListener("touchend", onEnd, { passive: true });
     return () => {
       el.removeEventListener("touchstart", onStart);
       el.removeEventListener("touchmove", onMove);
