@@ -83,7 +83,7 @@ function FaqItem({
       >
         <span
           className={`text-[18px] md:text-[20px] leading-[28px] md:leading-7.5 font-medium transition-colors duration-200 ${
-            open ? "text-[#0f172a]" : "text-[#334155]"
+            open ? "text-[#0f172a]" : "text-border-primary"
           }`}
         >
           {q}
