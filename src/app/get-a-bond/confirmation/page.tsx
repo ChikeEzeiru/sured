@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import FlowHeader from "@/components/flow/FlowHeader";
 import { BOND_TYPES, US_STATES } from "../bondData";
 
@@ -49,6 +49,7 @@ const CARRIER = "Travellers";
 
 function ConfirmationContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const bondTypeId = searchParams.get("type") ?? "";
   const stateAbbr = searchParams.get("state") ?? "";
@@ -129,6 +130,7 @@ function ConfirmationContent() {
                   {/* Primary: Pay */}
                   <button
                     type="button"
+                    onClick={() => router.push("/get-a-bond/complete")}
                     className="w-full flex items-center justify-center gap-1.5 bg-[#4f46e5] text-white text-base font-semibold rounded-[4px] px-4 py-2.5 border-2 border-white/12 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05),inset_0px_0px_0px_1px_rgba(0,0,0,0.18),inset_0px_-2px_0px_0px_rgba(0,0,0,0.05)] transition-opacity hover:opacity-90"
                   >
                     {payLabel}

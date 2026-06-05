@@ -250,7 +250,8 @@ export default function GetABond() {
       return;
     }
     const params = new URLSearchParams({ type: bondType.id, state: stateAbbr, flow: flow ?? "simple" });
-    router.push(`/get-a-bond/step-2?${params.toString()}`);
+    const nextPath = flow === "complex" ? "/get-a-bond/complex/step-2" : "/get-a-bond/step-2";
+    router.push(`${nextPath}?${params.toString()}`);
   }
 
   return (
