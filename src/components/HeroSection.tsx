@@ -86,7 +86,7 @@ export default function HeroSection() {
                   style={{ animationDelay: "240ms" }}
                 >
                   <a
-                    href="#"
+                    href="/get-a-bond"
                     className="flex items-center justify-center gap-2 bg-brand border-2 border-brand-subtle text-text-primary font-semibold rounded-sm px-4.5 py-3 text-md transition-opacity hover:opacity-90 w-full sm:w-auto"
                     style={{ boxShadow: "var(--shadow-brand)" }}
                   >

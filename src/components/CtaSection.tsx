@@ -45,7 +45,7 @@ export default function CtaSection() {
             <div className="flex flex-wrap gap-3 md:gap-4 items-center w-full md:w-auto justify-center">
               {/* Primary — Get Sured */}
               <Link
-                href="#"
+                href="/get-a-bond"
                 className="flex flex-1 min-w-47 md:flex-none items-center justify-center gap-1.5
                   px-4.5 py-3 rounded-sm bg-brand-hover
                   border-2 border-[rgba(255,255,255,0.12)]

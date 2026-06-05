@@ -61,7 +61,7 @@ export default function Navbar() {
         {/* Desktop right — CTA + Backed by */}
         <div className="hidden md:flex items-center gap-4 h-full py-2">
           <Link
-            href="#get-a-quote"
+            href="/get-a-bond"
             className="flex items-center gap-1 bg-brand border-2 border-white/12 text-text-primary text-sm font-semibold rounded-sm px-2.5 py-1.5 transition-opacity hover:opacity-90"
             style={{ boxShadow: "var(--shadow-brand)" }}
           >
@@ -136,7 +136,7 @@ export default function Navbar() {
             ))}
             <div className="pt-3 border-t border-border-secondary mt-2 flex flex-col gap-3">
               <Link
-                href="#get-a-quote"
+                href="/get-a-bond"
                 className="flex items-center justify-center gap-1 bg-brand border-2 border-white/12 text-text-primary text-sm font-semibold rounded-sm px-2.5 py-3 transition-opacity hover:opacity-90"
                 style={{ boxShadow: "var(--shadow-brand)" }}
                 onClick={() => setMenuOpen(false)}
