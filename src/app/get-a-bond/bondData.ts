@@ -1,21 +1,68 @@
 export type BondFlow = "simple" | "complex" | "unsure";
 
+export interface BondSubtype {
+  id: string;
+  label: string;
+  amount: number; // statutory bond amount in dollars
+}
+
 export interface BondType {
   id: string;
   label: string;
   flow: BondFlow;
   priceMin?: number;
   priceMax?: number;
+  subtypes?: BondSubtype[];
 }
 
 export const BOND_TYPES: BondType[] = [
   // ── Simple (instant quote, 2-step flow) ───────────────
   { id: "license-permit", label: "License & Permit Bond", flow: "simple", priceMin: 100, priceMax: 450 },
-  { id: "contractor-license", label: "Contractor License Bond", flow: "simple", priceMin: 150, priceMax: 500 },
-  { id: "auto-dealer", label: "Auto Dealer Bond", flow: "simple", priceMin: 150, priceMax: 600 },
-  { id: "motor-vehicle", label: "Motor Vehicle Dealer Bond", flow: "simple", priceMin: 150, priceMax: 600 },
-  { id: "mortgage-broker", label: "Mortgage Broker Bond", flow: "simple", priceMin: 200, priceMax: 800 },
-  { id: "notary", label: "Notary Bond", flow: "simple", priceMin: 50, priceMax: 100 },
+  {
+    id: "contractor-license", label: "Contractor License Bond", flow: "simple", priceMin: 150, priceMax: 500,
+    subtypes: [
+      { id: "general",     label: "General Contractor",           amount: 15000 },
+      { id: "electrical",  label: "Electrical Contractor",        amount: 20000 },
+      { id: "plumbing",    label: "Plumbing Contractor",          amount: 20000 },
+      { id: "hvac",        label: "HVAC Contractor",              amount: 15000 },
+      { id: "roofing",     label: "Roofing Contractor",           amount: 10000 },
+      { id: "temp",        label: "Temporary Contractor License", amount: 40000 },
+    ],
+  },
+  {
+    id: "auto-dealer", label: "Auto Dealer Bond", flow: "simple", priceMin: 150, priceMax: 600,
+    subtypes: [
+      { id: "new",        label: "New Vehicle Dealer",      amount: 50000 },
+      { id: "used",       label: "Used Vehicle Dealer",     amount: 25000 },
+      { id: "wholesale",  label: "Wholesale / Broker",      amount: 10000 },
+      { id: "motorcycle", label: "Motorcycle Dealer",       amount: 25000 },
+    ],
+  },
+  {
+    id: "motor-vehicle", label: "Motor Vehicle Dealer Bond", flow: "simple", priceMin: 150, priceMax: 600,
+    subtypes: [
+      { id: "new",      label: "New Vehicle Dealer",  amount: 50000 },
+      { id: "used",     label: "Used Vehicle Dealer", amount: 25000 },
+      { id: "wholesale", label: "Wholesale Dealer",   amount: 10000 },
+      { id: "salvage",  label: "Salvage Dealer",      amount: 25000 },
+    ],
+  },
+  {
+    id: "mortgage-broker", label: "Mortgage Broker Bond", flow: "simple", priceMin: 200, priceMax: 800,
+    subtypes: [
+      { id: "broker",     label: "Mortgage Broker",            amount: 50000  },
+      { id: "lender",     label: "Mortgage Banker / Lender",   amount: 100000 },
+      { id: "originator", label: "Mortgage Loan Originator",   amount: 25000  },
+    ],
+  },
+  {
+    id: "notary", label: "Notary Bond", flow: "simple", priceMin: 50, priceMax: 100,
+    subtypes: [
+      { id: "standard",      label: "Standard Notary",                    amount: 10000 },
+      { id: "electronic",    label: "Electronic / Remote Online Notary",  amount: 10000 },
+      { id: "signing-agent", label: "Notary Signing Agent",               amount: 25000 },
+    ],
+  },
   { id: "title-agent", label: "Title Agent Bond", flow: "simple", priceMin: 150, priceMax: 500 },
   { id: "freight-broker", label: "Freight Broker Bond", flow: "simple", priceMin: 900, priceMax: 1800 },
   { id: "money-transmitter", label: "Money Transmitter Bond", flow: "simple", priceMin: 500, priceMax: 2000 },

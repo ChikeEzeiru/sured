@@ -3,7 +3,7 @@
 import { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import FlowHeader from "@/components/flow/FlowHeader";
-import { BOND_TYPES, US_STATES } from "../bondData";
+import { BOND_TYPES, US_STATES, type BondSubtype } from "../bondData";
 
 // ── Icons ──────────────────────────────────────────────────────────────────────
 
@@ -24,23 +24,21 @@ function deriveQuote(priceMin: number, priceMax: number): number {
   return Math.round((priceMin + (priceMax - priceMin) * 0.4) / 5) * 5;
 }
 
-// Derive a bond amount based on bond type (typical statutory minimums)
-function deriveBondAmount(bondId: string): string {
-  const amounts: Record<string, string> = {
-    "license-permit": "$10,000",
-    "contractor-license": "$15,000",
-    "auto-dealer": "$25,000",
-    "motor-vehicle": "$25,000",
-    "mortgage-broker": "$50,000",
-    "notary": "$10,000",
-    "title-agent": "$50,000",
-    "freight-broker": "$75,000",
-    "money-transmitter": "$100,000",
-    "collection-agency": "$25,000",
-    "customs": "$50,000",
-    "tax-preparer": "$5,000",
-  };
-  return amounts[bondId] ?? "$25,000";
+// Fallback bond amounts for bonds without subtypes
+const FALLBACK_AMOUNTS: Record<string, number> = {
+  "license-permit":    10000,
+  "title-agent":       50000,
+  "freight-broker":    75000,
+  "money-transmitter": 100000,
+  "collection-agency": 25000,
+  "customs":           50000,
+  "tax-preparer":      5000,
+};
+
+function resolveBondAmount(bondId: string, subtype: BondSubtype | undefined): string {
+  if (subtype) return `$${subtype.amount.toLocaleString()}`;
+  const fallback = FALLBACK_AMOUNTS[bondId] ?? 25000;
+  return `$${fallback.toLocaleString()}`;
 }
 
 const CARRIER = "Travellers";
@@ -53,12 +51,14 @@ function ConfirmationContent() {
 
   const bondTypeId = searchParams.get("type") ?? "";
   const stateAbbr = searchParams.get("state") ?? "";
+  const subtypeId = searchParams.get("subtype") ?? "";
 
   const bondType = BOND_TYPES.find((b) => b.id === bondTypeId);
+  const subtype = bondType?.subtypes?.find((s) => s.id === subtypeId);
   const stateName = US_STATES.find((s) => s.abbr === stateAbbr)?.name ?? stateAbbr;
 
-  const bondLabel = bondType?.label ?? "Surety Bond";
-  const bondAmount = deriveBondAmount(bondTypeId);
+  const bondLabel = subtype ? `${bondType?.label} — ${subtype.label}` : (bondType?.label ?? "Surety Bond");
+  const bondAmount = resolveBondAmount(bondTypeId, subtype);
 
   const annualPremium =
     bondType?.priceMin && bondType?.priceMax
@@ -143,7 +143,6 @@ function ConfirmationContent() {
                     className="w-full flex items-center justify-center gap-1.5 text-base font-semibold text-[#475569] rounded-[4px] px-4 py-2.5 hover:bg-[#f8fafc] transition-colors"
                   >
                     Have a question? Call us (888) 236-8589
-                    <IconArrowRight />
                   </a>
                 </div>
 

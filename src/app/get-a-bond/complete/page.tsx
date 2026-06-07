@@ -76,7 +76,7 @@ export default function GetABondComplete() {
                   "Sured will remind you 30 days before renewal.",
                 ].map((text) => (
                   <div key={text} className="flex gap-2 items-start py-1">
-                    <span className="shrink-0 text-[#64748b] mt-px">
+                    <span className="shrink-0 text-[#cbd5e1] mt-px">
                       <IconInfo />
                     </span>
                     <p className="text-sm font-medium text-[#334155] leading-[20px]">{text}</p>

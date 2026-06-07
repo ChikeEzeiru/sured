@@ -231,17 +231,27 @@ const STATE_OPTIONS = US_STATES.map((s) => ({ value: s.abbr, label: s.name }));
 export default function GetABond() {
   const router = useRouter();
   const [bondTypeId, setBondTypeId] = useState("");
+  const [subtypeId, setSubtypeId] = useState("");
   const [stateAbbr, setStateAbbr] = useState("");
 
   const bondType = BOND_TYPES.find((b) => b.id === bondTypeId) ?? null;
   const flow: BondFlow | null = bondType?.flow ?? null;
   const stepCount: 2 | 3 = flow === "complex" ? 3 : 2;
 
+  const hasSubtypes = (bondType?.subtypes?.length ?? 0) > 0;
+  const subtypeOptions = bondType?.subtypes?.map((s) => ({
+    value: s.id,
+    label: `${s.label} — $${s.amount.toLocaleString()}`,
+  })) ?? [];
+
   const selectedState = US_STATES.find((s) => s.abbr === stateAbbr);
   const showStateField = flow !== "unsure";
   const showPriceEstimate = bondType?.flow === "simple" && stateAbbr !== "" && bondType.priceMin !== undefined;
   const showPhonePrompt = flow === "unsure";
-  const canProceed = bondTypeId !== "" && (flow === "unsure" || stateAbbr !== "");
+  const canProceed =
+    bondTypeId !== "" &&
+    (flow === "unsure" || stateAbbr !== "") &&
+    (!hasSubtypes || subtypeId !== "");
 
   function handleNext() {
     if (!bondType) return;
@@ -250,6 +260,7 @@ export default function GetABond() {
       return;
     }
     const params = new URLSearchParams({ type: bondType.id, state: stateAbbr, flow: flow ?? "simple" });
+    if (subtypeId) params.set("subtype", subtypeId);
     const nextPath = flow === "complex" ? "/get-a-bond/complex/step-2" : "/get-a-bond/step-2";
     router.push(`${nextPath}?${params.toString()}`);
   }
@@ -282,9 +293,20 @@ export default function GetABond() {
                     value={bondTypeId}
                     placeholder="e.g. License and Permit Bond"
                     options={BOND_TYPE_OPTIONS}
-                    onChange={setBondTypeId}
+                    onChange={(v) => { setBondTypeId(v); setSubtypeId(""); }}
                   />
                 </div>
+                {hasSubtypes && (
+                  <div className="relative">
+                    <SelectField
+                      label="Bond Subtype"
+                      value={subtypeId}
+                      placeholder="Select subtype"
+                      options={subtypeOptions}
+                      onChange={setSubtypeId}
+                    />
+                  </div>
+                )}
                 {showStateField && (
                   <div className="relative">
                     <SelectField

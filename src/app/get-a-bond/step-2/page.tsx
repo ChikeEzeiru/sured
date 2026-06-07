@@ -219,9 +219,17 @@ function Step2Content() {
                     label="Phone"
                     required
                     type="tel"
-                    placeholder="e.g. (555) 000-0000"
+                    placeholder="(555) 000-0000"
                     value={phone}
-                    onChange={(v) => { setPhone(v); setErrors((e) => ({ ...e, phone: "" })); }}
+                    onChange={(v) => {
+                      const digits = v.replace(/\D/g, "").slice(0, 10);
+                      let formatted = digits;
+                      if (digits.length > 6) formatted = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+                      else if (digits.length > 3) formatted = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+                      else if (digits.length > 0) formatted = `(${digits}`;
+                      setPhone(formatted);
+                      setErrors((e) => ({ ...e, phone: "" }));
+                    }}
                     icon={<IconPhone />}
                     error={errors.phone}
                     autoComplete="tel"
