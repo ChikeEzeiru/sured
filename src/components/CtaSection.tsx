@@ -8,7 +8,17 @@ const Dithering = dynamic(
   { ssr: false }
 );
 
-export default function CtaSection() {
+export default function CtaSection({
+  heading = "Your bond is ready when you are.",
+  headingAccent,
+  primaryLabel = "Get Sured",
+  disclaimer = "No commitment until you pay. Soft credit pull only.",
+}: {
+  heading?: string;
+  headingAccent?: string;
+  primaryLabel?: string;
+  disclaimer?: string;
+} = {}) {
   return (
     <section className="w-full flex flex-col items-center bg-white">
       <div className="relative w-full max-w-310 border-x border-b border-[#f1f5f9] overflow-hidden">
@@ -35,15 +45,21 @@ export default function CtaSection() {
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center gap-10 md:gap-12 py-12 md:py-24 px-3 md:px-8">
           {/* Heading */}
-          <h2 className="text-display-sm md:text-[36px] font-medium leading-display-sm md:leading-11 tracking-[-0.02em] text-[#1e293b] text-center">
-            Your bond is ready when you are.
+          <h2 className="text-display-sm md:text-[36px] font-medium leading-display-sm md:leading-11 tracking-[-0.02em] text-center">
+            <span className="text-[#1e293b]">{heading}</span>
+            {headingAccent && (
+              <>
+                <br />
+                <span className="text-[#64748b]">{headingAccent}</span>
+              </>
+            )}
           </h2>
 
           {/* CTAs + disclaimer */}
           <div className="flex flex-col items-center gap-3 w-full md:w-auto">
             {/* Buttons */}
             <div className="flex flex-wrap gap-3 md:gap-4 items-center w-full md:w-auto justify-center">
-              {/* Primary — Get Sured */}
+              {/* Primary */}
               <Link
                 href="/get-a-bond"
                 className="flex flex-1 min-w-47 md:flex-none items-center justify-center gap-1.5
@@ -53,7 +69,7 @@ export default function CtaSection() {
                   text-white text-md font-semibold leading-md whitespace-nowrap
                   hover:bg-[#4338ca] transition-colors"
               >
-                Get Sured
+                {primaryLabel}
                 <svg
                   width="20"
                   height="20"
@@ -87,8 +103,8 @@ export default function CtaSection() {
             </div>
 
             {/* Disclaimer */}
-            <p className="text-sm md:text-sm font-medium leading-sm text-[#64748b] text-center">
-              No commitment until you pay. Soft credit pull only.
+            <p className="text-sm font-medium leading-sm text-[#64748b] text-center">
+              {disclaimer}
             </p>
           </div>
         </div>
