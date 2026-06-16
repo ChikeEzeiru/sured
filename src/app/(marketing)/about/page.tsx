@@ -1,5 +1,8 @@
 import AboutHeroShader from "@/components/AboutHeroShader";
 import CtaSection from "@/components/CtaSection";
+import MissionSection from "./MissionSection";
+import TeamSection from "./TeamSection";
+import ValuesSection from "./ValuesSection";
 
 export default function AboutPage() {
   return (
@@ -29,6 +32,12 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <MissionSection />
+
+      <TeamSection />
+
+      <ValuesSection />
 
       <CtaSection
         heading="We'd rather show you than tell you."
