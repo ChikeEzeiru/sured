@@ -7,8 +7,8 @@ import Link from "next/link";
 
 const navLinks = [
   { label: "How it works", href: "/how-it-works" },
-  { label: "Bond types", href: "#bond-types" },
-  { label: "About", href: "#about" },
+  { label: "Bond types", href: "/bond-types" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -16,7 +16,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const light = pathname === "/how-it-works";
+  const light = pathname === "/how-it-works" || pathname === "/about";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 1);
@@ -58,7 +58,7 @@ export default function Navbar() {
                 className={`flex items-center justify-center px-3 h-full text-sm font-semibold transition-colors whitespace-nowrap ${
                   light
                     ? pathname === link.href ? "text-[#0f172a]" : "text-[#64748b] hover:text-[#334155]"
-                    : "text-text-muted hover:text-text-secondary"
+                    : pathname === link.href ? "text-text-primary" : "text-text-muted hover:text-text-secondary"
                 }`}
               >
                 {link.label}
@@ -137,7 +137,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`flex items-center px-3 py-3 text-sm font-semibold transition-colors rounded-sm ${light ? "text-[#64748b] hover:text-[#334155] hover:bg-[#f8fafc]" : "text-text-muted hover:text-text-secondary hover:bg-surface"}`}
+                className={`flex items-center px-3 py-3 text-sm font-semibold transition-colors rounded-sm ${light ? (pathname === link.href ? "text-[#0f172a]" : "text-[#64748b] hover:text-[#334155] hover:bg-[#f8fafc]") : (pathname === link.href ? "text-text-primary" : "text-text-muted hover:text-text-secondary hover:bg-surface")}`}
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}

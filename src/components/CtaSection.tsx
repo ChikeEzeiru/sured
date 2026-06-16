@@ -11,11 +11,13 @@ const Dithering = dynamic(
 export default function CtaSection({
   heading = "Your bond is ready when you are.",
   headingAccent,
+  subtitle,
   primaryLabel = "Get Sured",
   disclaimer = "No commitment until you pay. Soft credit pull only.",
 }: {
   heading?: string;
   headingAccent?: string;
+  subtitle?: string;
   primaryLabel?: string;
   disclaimer?: string;
 } = {}) {
@@ -54,6 +56,12 @@ export default function CtaSection({
               </>
             )}
           </h2>
+
+          {subtitle && (
+            <p className="text-xl font-normal text-[#64748b] leading-[30px] text-center max-w-xl -mt-6 md:-mt-8">
+              {subtitle}
+            </p>
+          )}
 
           {/* CTAs + disclaimer */}
           <div className="flex flex-col items-center gap-3 w-full md:w-auto">
