@@ -9,7 +9,7 @@ const navLinks = [
   { label: "How it works", href: "/how-it-works" },
   { label: "Bond types", href: "/bond-types" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {

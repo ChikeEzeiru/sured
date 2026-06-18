@@ -49,11 +49,11 @@ export default function MissionSection() {
           </div>
 
           {/* Right: fact rows */}
-          <div className="flex flex-col border-t md:border-t-0 md:border-l border-[#e2e8f0] md:min-w-[480px]">
+          <div className="flex flex-col border-t md:border-t-0 md:border-l border-[#e2e8f0] md:min-w-[480px] md:self-stretch">
             {FACTS.map((fact) => (
               <div
                 key={fact}
-                className="flex items-center gap-2 px-3 md:pl-4 md:pr-8 py-5 border-b border-[#e2e8f0] last:border-b-0 md:last:border-b md:border-r md:border-[#e2e8f0]"
+                className="flex flex-1 items-center gap-2 px-3 md:pl-4 md:pr-8 py-5 border-b border-[#e2e8f0] last:border-b-0"
               >
                 <CheckIcon />
                 <p className="text-xl font-normal text-[#64748b] leading-[30px]">
