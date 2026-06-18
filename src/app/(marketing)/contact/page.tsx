@@ -45,9 +45,12 @@ export default function ContactPage() {
             <div className="flex flex-col md:min-w-120 border-b md:border-b-0 md:border-r border-[#e2e8f0] md:self-stretch">
               {/* Phone */}
               <div className="flex flex-col gap-3 pl-3 md:pl-8 pr-3 md:pr-4 pt-6 pb-8 border-b border-[#e2e8f0]">
-                <p className="text-display-md font-medium text-border-primary leading-display-sm tracking-[-0.02em]">
+                <a
+                  href="tel:+15551234567"
+                  className="text-display-md font-medium text-border-primary leading-display-sm tracking-[-0.02em] hover:text-[#4f46e5] transition-colors"
+                >
                   (555) 123-4567
-                </p>
+                </a>
                 <p className="text-lg font-normal text-[#64748b] leading-7.5">
                   Available 7 days a week, including weekends.
                 </p>
@@ -77,7 +80,7 @@ export default function ContactPage() {
               </div>
 
               {/* Info box */}
-              <div className="pl-3 md:pl-8 pr-3 md:pr-4 py-4">
+              <div className="pl-3 md:pl-8 pr-3 md:pr-8 py-6">
                 <div className="flex gap-3 items-start px-5 py-7 bg-[#eef2ff] border border-[#818cf8] rounded-sm">
                   <svg
                     width="20"
