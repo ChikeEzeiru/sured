@@ -12,6 +12,11 @@ export const metadata: Metadata = {
   title: "Sured — Same Day Surety Bonds",
   description:
     "A modern surety bond agency. Fast bonds. Fair rates. Real specialists.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
