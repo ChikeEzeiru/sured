@@ -47,7 +47,7 @@ export default function ContactPage() {
               <div className="flex flex-col gap-3 pl-3 md:pl-8 pr-3 md:pr-4 pt-6 pb-8 border-b border-[#e2e8f0]">
                 <a
                   href="tel:+15551234567"
-                  className="text-display-md font-medium text-border-primary leading-display-sm tracking-[-0.02em] hover:text-[#4f46e5] transition-colors"
+                  className="text-display-md font-medium text-border-primary leading-display-sm tracking-[-0.02em] hover:text-brand-hover transition-colors"
                 >
                   (555) 123-4567
                 </a>
